@@ -70,7 +70,7 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build -t ${{ secrets.DOCKER_REPO }} .
+          docker build -t ${{ vars.DOCKER_REPO }} .
 
       - name: Log in to Docker Hub
         uses: docker/login-action@v1
@@ -83,7 +83,7 @@ jobs:
         with:
           context: .
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPO }}:${{ github.run_number }}
+          tags: ${{ secrets.DOCKER_USERNAME }}/${{ vars.DOCKER_REPO }}:${{ github.run_number }}
 
       - name: Configure Google Cloud SDK
         uses: google-github-actions/setup-gcloud@v0.4.0
@@ -99,5 +99,5 @@ jobs:
 
       - name: Deploy to GKE
         run: |
-          kubectl create deployment cts-backend --image=${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPO }}:${{ github.run_number }}
+          kubectl create deployment cts-backend --image=${{ secrets.DOCKER_USERNAME }}/${{ vars.DOCKER_REPO }}:${{ github.run_number }}
           kubectl expose deployment cts-backend --type=LoadBalancer --port=8080 --target-port=8080
