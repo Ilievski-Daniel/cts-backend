@@ -13,22 +13,27 @@ The CTS Backend Application is a simple connectivity test server designed to sup
 
    ```bash
    git clone https://github.com/Ilievski-Daniel/cts-backend.git
+   ```
+
+2. Change your directory:
+
+   ```bash
    cd cts-backend
    ```
 
-2. Build the Docker image:
+3. Build the Docker image:
 
     ```
     docker build -t cts-backend .
     ```
 
-3. Access the CTS API endpoint:
+4. Access the CTS API endpoint:
 
     ```
     curl http://localhost:8080/ping
     ```
 
-<b>The response should be a JSON object with a "message" field.</b>
+- The response should be a JSON object with a "message" field.
 
 ## Configuration
 
