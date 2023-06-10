@@ -41,7 +41,6 @@ Please ensure that you make consistent changes in both files to ensure proper fu
 ## CI/CD Pipeline
 
 The project includes a CI/CD pipeline for automated testing and deployment. 
-The pipeline is triggered on every push and pull request to any branch. 
 
 ### It consists of two jobs:
 
