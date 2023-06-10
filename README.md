@@ -45,9 +45,9 @@ The pipeline is triggered on every push and pull request to any branch.
 
 ### It consists of two jobs:
 
-<b>testing:</b> This job runs on the ubuntu-latest environment and performs linting and unit testing of the application code.
+- <b>testing:</b> This job runs on the ubuntu-latest environment and performs linting and unit testing of the application code.
 
-<b>deploy:</b> This job runs on the ubuntu-latest environment and is triggered only when the testing job is successful and the branch is main. 
+- <b>deploy:</b> This job runs on the ubuntu-latest environment and is triggered only when the testing job is successful and the branch is main. 
 It builds a Docker image, pushes it to Docker Hub, configures the necessary tools for Google Cloud deployment, checks and deletes the existing deployment and service (if any), and then deploys the updated application to the GKE cluster.
 
 Please refer to the CI/CD Pipeline section in the repository for more details on the pipeline configuration.
