@@ -30,7 +30,7 @@ The CTS Backend Application is a simple connectivity test server designed to sup
 
 <b>The response should be a JSON object with a "message" field.</b>
 
-##Configuration
+## Configuration
 
 Port: By default, the application runs on port 8080.
 
