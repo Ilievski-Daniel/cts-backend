@@ -53,7 +53,7 @@ The pipeline is triggered on every push and pull request to any branch.
 
     It builds a Docker image, pushes it to Docker Hub, configures the necessary tools for Google Cloud deployment, checks and deletes the existing deployment and service (if any), and then deploys the updated application to the GKE cluster.
 
-<b>Please refer to the CI/CD Pipeline section in the repository for more details on the pipeline configuration.</b>
+<b>Please refer to the [CI/CD Pipeline](/.github/workflows/ci_cd_pipeline.yaml) section in the repository for more details on the pipeline configuration.</b>
 
 ## Contact
 For any questions or inquiries, please contact: [Daniel Ilievski](https://www.linkedin.com/in/danielilievski/)
