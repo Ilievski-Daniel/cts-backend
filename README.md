@@ -54,5 +54,34 @@ The project includes a CI/CD pipeline for automated testing and deployment.
 
 Please refer to the [CI/CD Pipeline](/.github/workflows/ci_cd_pipeline.yaml) workflow in the repository for more details on the pipeline configuration.
 
+## GitHub Actions Pipeline Configuration
+
+### Variables
+
+To set up the CI/CD pipeline, you need to define the following variables:
+
+| Variable           |  Description                                |
+|:-------------------|:--------------------------------------------|
+| SERVICE_PORT       | Port number for the CTS backend service     |
+| CONTAINER_PORT     | Port number the container is listening on   |
+| GKE_CLUSTER_NAME   | Google Kubernetes Engine (GKE) cluster name |
+| GCP_PROJECT_ID     | Google Cloud Platform region                |
+| GCP_REGION         | Google Kubernetes Engine (GKE) cluster name |
+| GCP_ZONE	         | Google Cloud Platform zone                  |
+
+Make sure to provide the necessary values for these variables when configuring the GitHub Actions pipeline. 
+
+### Secrets
+
+The following secrets should be added to the GitHub repository:
+
+| Secret          |  Description                                                       |
+|:----------------|:-------------------------------------------------------------------|
+| DOCKER_USERNAME | Docker Hub username                                                |
+| DOCKER_PASSWORD | Docker Hub password                                                |
+| GCP_SA_KEY      | Service account key for Google Cloud Platform authentication (JSON)|
+
+Make sure to provide the actual values for these secrets in the repository's settings or the GitHub Actions secrets section.
+
 ## Contact
 For any questions or inquiries, please contact: [Daniel Ilievski](https://www.linkedin.com/in/danielilievski/)
