@@ -68,6 +68,46 @@ jobs:
         run: |
           sudo apt-get update && sudo apt-get install google-cloud-sdk-gke-gcloud-auth-plugin -y
 
+      - name: Configure Google Cloud SDK
+        uses: google-github-actions/setup-gcloud@v0.4.0
+        with:
+          service_account_key: ${{ secrets.GCP_SA_KEY }}
+          project_id: ${{ vars.GCP_PROJECT_ID }}
+          default_region: ${{ secrets.GCP_REGION }}
+          default_zone: ${{ vars.GCP_ZONE }}
+
+      - name: Configure kubectl
+        run: |
+          gcloud container clusters get-credentials ${{ vars.GKE_CLUSTER_NAME }} --zone ${{ vars.GCP_ZONE }} --project ${{ vars.GCP_PROJECT_ID }}
+
+      - name: Check if deployment exists
+        id: check_deployment
+        run: |
+          if kubectl get deployment cts-backend; then
+            echo "::set-output name=deployment_exists::true"
+          else
+            echo "::set-output name=deployment_exists::false"
+          fi
+
+      - name: Delete deployment if exists
+        if: steps.check_deployment.outputs.deployment_exists == 'true'
+        run: |
+          kubectl delete deployment cts-backend
+
+      - name: Check if service exists
+        id: check_service
+        run: |
+          if kubectl get service cts-backend; then
+            echo "::set-output name=service_exists::true"
+          else
+            echo "::set-output name=service_exists::false"
+          fi
+
+      - name: Delete service if exists
+        if: steps.check_service.outputs.service_exists == 'true'
+        run: |
+          kubectl delete service cts-backend
+
       - name: Build Docker image
         run: |
           docker build -t ${{ vars.DOCKER_REPO }} .
@@ -84,18 +124,6 @@ jobs:
           context: .
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/${{ vars.DOCKER_REPO }}:${{ github.run_number }}
-
-      - name: Configure Google Cloud SDK
-        uses: google-github-actions/setup-gcloud@v0.4.0
-        with:
-          service_account_key: ${{ secrets.GCP_SA_KEY }}
-          project_id: ${{ vars.GCP_PROJECT_ID }}
-          default_region: ${{ secrets.GCP_REGION }}
-          default_zone: ${{ vars.GCP_ZONE }}
-
-      - name: Configure kubectl
-        run: |
-          gcloud container clusters get-credentials ${{ vars.GKE_CLUSTER_NAME }} --zone ${{ vars.GCP_ZONE }} --project ${{ vars.GCP_PROJECT_ID }}
 
       - name: Deploy to GKE
         run: |
