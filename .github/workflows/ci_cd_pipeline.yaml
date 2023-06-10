@@ -128,4 +128,4 @@ jobs:
       - name: Deploy to GKE
         run: |
           kubectl create deployment cts-backend --image=${{ secrets.DOCKER_USERNAME }}/${{ vars.DOCKER_REPO }}:${{ github.run_number }}
-          kubectl expose deployment cts-backend --type=LoadBalancer --port=8080 --target-port=8080
+          kubectl expose deployment cts-backend --type=LoadBalancer --port=${{ vars.SERVICE_PORT }} --target-port=${{ vars.CONTAINER_PORT }}
