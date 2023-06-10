@@ -7,7 +7,7 @@ The CTS Backend Application is a simple connectivity test server designed to sup
 - Docker: [Installation Guide](https://docs.docker.com/get-docker/)
 - Python 3.9 or higher: [Installation Guide](https://www.python.org/downloads/)
 
-## Installation
+## Installation (Run locally)
 
 1. Clone the repository:
 
@@ -38,8 +38,19 @@ If you wish to change the port, you can modify the main.py file and the Dockerfi
 
 Please ensure that you make consistent changes in both files to ensure proper functioning of the application.
 
-## Deployment
-To deploy the CTS Backend Application to Google Cloud or any other cloud platform, follow the standard deployment procedures for deploying Docker containers.
+## CI/CD Pipeline
+
+The project includes a CI/CD pipeline for automated testing and deployment. 
+The pipeline is triggered on every push and pull request to any branch. 
+
+### It consists of two jobs:
+
+<b>testing:</b> This job runs on the ubuntu-latest environment and performs linting and unit testing of the application code.
+
+<b>deploy:</b> This job runs on the ubuntu-latest environment and is triggered only when the testing job is successful and the branch is main. 
+It builds a Docker image, pushes it to Docker Hub, configures the necessary tools for Google Cloud deployment, checks and deletes the existing deployment and service (if any), and then deploys the updated application to the GKE cluster.
+
+Please refer to the CI/CD Pipeline section in the repository for more details on the pipeline configuration.
 
 ## Contact
 For any questions or inquiries, please contact: [Daniel Ilievski](https://www.linkedin.com/in/danielilievski/)
