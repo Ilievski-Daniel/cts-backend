@@ -88,6 +88,10 @@ The following secrets should be added to the GitHub repository:
 | DOCKER_PASSWORD | Docker Hub password                                                |
 | GCP_SA_KEY      | Service account key for Google Cloud Platform authentication (JSON)|
 
+The Service Account that is used for authentication should have the Kubernetes Engine Developer Role grant, it should look something like this:
+
+![CTS Backend Service Account](./Images/cts-backend-service-account.png?raw=true)
+
 Make sure to provide the actual values for these secrets in the repository's settings or the GitHub Actions secrets section.
 
 ## Contact
