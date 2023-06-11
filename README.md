@@ -65,14 +65,15 @@ Please refer to the [CI/CD Pipeline](/.github/workflows/ci_cd_pipeline.yaml) wor
 
 To set up the CI/CD pipeline, you need to define the following variables:
 
-| Variable           |  Description                                |
-|:-------------------|:--------------------------------------------|
-| SERVICE_PORT       | Port number for the CTS backend service     |
-| CONTAINER_PORT     | Port number the container is listening on   |
-| GKE_CLUSTER_NAME   | Google Kubernetes Engine (GKE) cluster name |
-| GCP_PROJECT_ID     | Google Cloud Platform region                |
-| GCP_REGION         | Google Kubernetes Engine (GKE) cluster name |
-| GCP_ZONE	         | Google Cloud Platform zone                  |
+| Variable           |  Description                                    |
+|:-------------------|:------------------------------------------------|
+| GCP_PROJECT_ID     | Google Cloud Platform region                    |
+| GCP_REGION         | Google Kubernetes Engine (GKE) cluster name     |
+| GCP_ZONE	         | Google Cloud Platform zone                      |
+| GKE_CLUSTER_NAME   | Google Kubernetes Engine (GKE) cluster name     |
+| DOCKER_REPO        | Docker Repository for the CTS application image |
+| SERVICE_PORT       | Port number for the CTS backend service         |
+| CONTAINER_PORT     | Port number the container is listening on       |
 
 Make sure to provide the necessary values for these variables when configuring the GitHub Actions pipeline. 
 
