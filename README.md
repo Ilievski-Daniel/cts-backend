@@ -72,9 +72,9 @@ To set up the CI/CD pipeline, you need to define the following variables:
 | GCP_ZONE	          | Google Cloud Platform zone                                |
 | GKE_CLUSTER_NAME    | Google Kubernetes Engine (GKE) cluster name               |
 | DOCKER_REPO         | Docker Repository for the CTS application image           |
+| DEPLOYMENT_REPLICAS | Number of pods that will host the CTS Backend application |
 | SERVICE_PORT        | Port number for the CTS backend service                   |
 | CONTAINER_PORT      | Port number the container is listening on                 |
-| DEPLOYMENT_REPLICAS | Number of pods that will host the CTS Backend application |
 
 Make sure to provide the necessary values for these variables when configuring the GitHub Actions pipeline. 
 
