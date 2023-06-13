@@ -125,7 +125,8 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/${{ vars.DOCKER_REPO }}:${{ github.run_number }}
 
-      - name: Deploy to GKE
+      - name: Deploy to GKE with pod autoscaling
         run: |
           kubectl create deployment cts-backend --image=${{ secrets.DOCKER_USERNAME }}/${{ vars.DOCKER_REPO }}:${{ github.run_number }} --replicas=${{ vars.DEPLOYMENT_REPLICAS }}
           kubectl expose deployment cts-backend --type=LoadBalancer --port=${{ vars.SERVICE_PORT }} --target-port=${{ vars.CONTAINER_PORT }}
+          kubectl autoscale deployment cts-backend --cpu-percent=80 --min=2 --max=10
