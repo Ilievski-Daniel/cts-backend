@@ -127,7 +127,7 @@ jobs:
 
       - name: Deploy to GKE with pod autoscaling
         run: |
-          kubectl create deployment cts-backend --image=${{ secrets.DOCKER_USERNAME }}/${{ vars.DOCKER_REPO }}:${{ github.run_number }} --replicas=${{ vars.DEPLOYMENT_REPLICAS }}
+          kubectl create deployment cts-backend --image=${{ secrets.DOCKER_USERNAME }}/${{ vars.DOCKER_REPO }}:${{ github.run_number }} --replicas=1
           kubectl expose deployment cts-backend --type=LoadBalancer --port=${{ vars.SERVICE_PORT }} --target-port=${{ vars.CONTAINER_PORT }}
           kubectl set resources deployment cts-backend --requests=cpu=200m,memory=200Mi --limits=cpu=500m,memory=500Mi
-          kubectl autoscale deployment cts-backend --cpu-percent=80 --min=3 --max=10
+          kubectl autoscale deployment cts-backend --cpu-percent=80 --min=1 --max=10
