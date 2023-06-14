@@ -129,5 +129,5 @@ jobs:
         run: |
           kubectl create deployment cts-backend --image=${{ secrets.DOCKER_USERNAME }}/${{ vars.DOCKER_REPO }}:${{ github.run_number }} --replicas=${{ vars.DEPLOYMENT_REPLICAS }}
           kubectl expose deployment cts-backend --type=LoadBalancer --port=${{ vars.SERVICE_PORT }} --target-port=${{ vars.CONTAINER_PORT }}
-          kubectl set resources deployment cts-backend --requests=cpu=${{ vars.REQUESTS_CPU }},memory=${{ vars.REQUESTS_MEMO[RY }} --limits=cpu=${{ vars.LIMITS_CPU }},memory=${{ LIMITS_MEMORY }}
-          kubectl autoscale deployment cts-backend --cpu-percent=${{ vars.SCALE_CPU_PERCENT }} --min=${{ SCALE_MIN }} --max=${{ SCALE_MAX }}
+          kubectl set resources deployment cts-backend --requests=cpu=${{ vars.REQUESTS_CPU }},memory=${{ vars.REQUESTS_MEMORY }} --limits=cpu=${{ vars.LIMITS_CPU }},memory=${{ vars.LIMITS_MEMORY }}
+          kubectl autoscale deployment cts-backend --cpu-percent=${{ vars.SCALE_CPU_PERCENT }} --min=${{ vars.SCALE_MIN }} --max=${{ vars.SCALE_MAX }}
