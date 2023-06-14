@@ -55,7 +55,7 @@ The project includes a CI/CD pipeline for automated testing and deployment.
 - <b>deploy:</b> 
     This job runs on the ubuntu-latest environment and is triggered only when the testing job is successful and the branch is main. 
 
-    It builds a Docker image, pushes it to Docker Hub, configures the necessary tools for Google Cloud deployment, checks and deletes the existing deployment and service (if any), and then deploys the updated application to the GKE cluster.
+    It builds a Docker image, pushes it to Docker Hub, configures the necessary tools for Google Cloud deployment, checks and deletes the existing deployment and service (if any), and then deploys the updated application to the GKE cluster (with pod autoscaling enabled).
 
 Please refer to the [CI/CD Pipeline](/.github/workflows/ci_cd_pipeline.yaml) workflow in the repository for more details on the pipeline configuration.
 
@@ -65,16 +65,23 @@ Please refer to the [CI/CD Pipeline](/.github/workflows/ci_cd_pipeline.yaml) wor
 
 To set up the CI/CD pipeline, you need to define the following variables:
 
-| Variable            |  Description                                              |
-|:--------------------|:----------------------------------------------------------|
-| GCP_PROJECT_ID      | Google Cloud Platform region                              |
-| GCP_REGION          | Google Kubernetes Engine (GKE) cluster name               |
-| GCP_ZONE	          | Google Cloud Platform zone                                |
-| GKE_CLUSTER_NAME    | Google Kubernetes Engine (GKE) cluster name               |
-| DOCKER_REPO         | Docker Repository for the CTS application image           |
-| DEPLOYMENT_REPLICAS | Number of pods that will host the CTS Backend application |
-| SERVICE_PORT        | Port number for the CTS backend service                   |
-| CONTAINER_PORT      | Port number the container is listening on                 |
+| Variable            |  Description                                                   | 
+|:--------------------|:---------------------------------------------------------------|
+| GCP_PROJECT_ID      | Google Cloud Platform region                                   |
+| GCP_REGION          | Google Kubernetes Engine (GKE) cluster name                    |
+| GCP_ZONE	          | Google Cloud Platform zone                                     |
+| GKE_CLUSTER_NAME    | Google Kubernetes Engine (GKE) cluster name                    |
+| DOCKER_REPO         | Docker Repository for the CTS application image                |
+| DEPLOYMENT_REPLICAS | Number of pods that will host the CTS Backend application      |
+| SERVICE_PORT        | Port number for the CTS backend service                        |
+| CONTAINER_PORT      | Port number the container is listening on                      |
+| REQUESTS_CPU        | Amount of CPU that a pod should request                        |
+| REQUESTS_MEMORY     | Amount of Memory that a pod should request                     |
+| LIMITS_CPU          | Maximum amount of CPU that a pod can use                       |
+| LIMITS_MEMORY       | Maximum amount of Memory that a pod can use                    |
+| SCALE_CPU_PERCENT   | Scale up/down according to the CPU percentage used by the pods |
+| SCALE_MIN           | Min number of replicas/pods that should be running at all times|
+| SCALE_MAX           | Max number of replicas/pods that should be running at all times|
 
 Make sure to provide the necessary values for these variables when configuring the GitHub Actions pipeline. 
 
