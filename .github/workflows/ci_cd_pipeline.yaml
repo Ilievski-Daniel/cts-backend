@@ -66,11 +66,13 @@ jobs:
           default_region: ${{ vars.GCP_REGION }}
           default_zone: ${{ vars.GCP_ZONE }}
 
-      - name: Authenticate with Google Cloud SDK
+      - name: Configure Google Cloud authentication
         env:
-          GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GCP_SA_KEY }}
+          GCP_SA_KEY: ${{ secrets.GCP_SA_KEY }}
         run: |
-          gcloud auth activate-service-account --key-file="${GOOGLE_APPLICATION_CREDENTIALS}"
+          echo "$GCP_SA_KEY" > /tmp/gcp_sa_key.json
+          gcloud auth activate-service-account --key-file=/tmp/gcp_sa_key.json
+          export GOOGLE_APPLICATION_CREDENTIALS=/tmp/gcp_sa_key.json
 
       - name: Configure kubectl
         run: |
