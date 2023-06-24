@@ -56,13 +56,10 @@ jobs:
           curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
           sudo install kubectl /usr/local/bin/
 
-      - name: Configure Google Cloud authentication
-        env:
-          GCP_SA_KEY: ${{ secrets.GCP_SA_KEY }}
-        run: |
-          echo "$GCP_SA_KEY" > /tmp/gcp_sa_key.json
-          gcloud auth activate-service-account --key-file=/tmp/gcp_sa_key.json
-          export GOOGLE_APPLICATION_CREDENTIALS=/tmp/gcp_sa_key.json
+      - name: 'Authenticate to Google Cloud'
+        uses: 'google-github-actions/auth@v1'
+        with:
+          credentials_json: '${{ secrets.GOOGLE_CREDENTIALS }}'
 
       - name: Configure Google Cloud SDK
         uses: google-github-actions/setup-gcloud@v1
