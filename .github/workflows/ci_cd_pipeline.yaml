@@ -68,7 +68,6 @@ jobs:
           project_id: ${{ vars.GCP_PROJECT_ID }}
           default_region: ${{ vars.GCP_REGION }}
           default_zone: ${{ vars.GCP_ZONE }}
-          export_default_credentials: true
 
       - name: Configure kubectl
         run: |
