@@ -7,8 +7,8 @@ WORKDIR /app
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy the application code into the container
-COPY . .
+# Copy only the necessary files and directories
+COPY main.py .
 
 # Set the default port as an environment variable
 ENV PORT=8080
