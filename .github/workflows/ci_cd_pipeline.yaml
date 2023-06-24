@@ -55,7 +55,8 @@ jobs:
 
       - name: Install kubectl
         run: |
-          sudo apt-get update && sudo apt-get install kubectl -y
+          curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+          sudo install kubectl /usr/local/bin/
 
       - name: Configure Google Cloud SDK
         uses: google-github-actions/setup-gcloud@v0.4.0
