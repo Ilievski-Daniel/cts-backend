@@ -1,7 +1,7 @@
 FROM python:3.9-alpine
 
 # Create a non-root user
-RUN useradd -m appuser
+RUN adduser --disabled-password --gecos "" appuser
 
 # Set the working directory and adjust permissions
 WORKDIR /app
