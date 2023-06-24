@@ -120,6 +120,11 @@ jobs:
 
       - name: Deploy to GKE with pod autoscaling
         run: |
+          echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
+          curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key --keyring /usr/share/keyrings/cloud.google.gpg add -
+          sudo apt update
+          sudo apt-get install google-cloud-sdk-gke-gcloud-auth-plugin kubectl
+          export USE_GKE_GCLOUD_AUTH_PLUGIN=True
           kubectl create deployment cts-backend --image=${{ secrets.DOCKER_USERNAME }}/${{ vars.DOCKER_REPO }}:${{ github.run_number }} --replicas=${{ vars.DEPLOYMENT_REPLICAS }}
           kubectl expose deployment cts-backend --type=LoadBalancer --port=${{ vars.SERVICE_PORT }} --target-port=${{ vars.CONTAINER_PORT }}
           kubectl set resources deployment cts-backend --requests=cpu=${{ vars.REQUESTS_CPU }},memory=${{ vars.REQUESTS_MEMORY }} --limits=cpu=${{ vars.LIMITS_CPU }},memory=${{ vars.LIMITS_MEMORY }}
