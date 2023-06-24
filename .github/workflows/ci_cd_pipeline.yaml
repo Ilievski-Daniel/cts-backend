@@ -124,6 +124,8 @@ jobs:
           tags: ${{ secrets.DOCKER_USERNAME }}/${{ vars.DOCKER_REPO }}:${{ github.run_number }}
 
       - name: Deploy to GKE with pod autoscaling
+        env:
+          GOOGLE_APPLICATION_CREDENTIALS: /tmp/gcp_sa_key.json
         run: |
           kubectl create deployment cts-backend --image=${{ secrets.DOCKER_USERNAME }}/${{ vars.DOCKER_REPO }}:${{ github.run_number }} --replicas=${{ vars.DEPLOYMENT_REPLICAS }}
           kubectl expose deployment cts-backend --type=LoadBalancer --port=${{ vars.SERVICE_PORT }} --target-port=${{ vars.CONTAINER_PORT }}
