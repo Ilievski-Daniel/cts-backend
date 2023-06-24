@@ -1,7 +1,14 @@
 FROM python:3.9-slim
 
-# Set the working directory in the container
+# Create a non-root user
+RUN useradd -m appuser
+
+# Set the working directory and adjust permissions
 WORKDIR /app
+RUN chown -R appuser:appuser /app
+
+# Switch to the non-root user
+USER appuser
 
 # Copy the requirements file and install the dependencies
 COPY requirements.txt .
